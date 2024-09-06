@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Newspaper list
+    <a class="btn btn-primary" href="#">Create</a>
+  </h1>
+
+  {% if newspaper_list %}
+  <table class="table">
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th>Update</th>
+      <th>Delete</th>
+    </tr>
+    {% for newspaper in newspaper_list %}
+    <tr>
+      <td>
+        <a href="#">{{ newspaper.title }}</a>
+      </td>
+      <td>
+        {{ newspaper.content }}
+      </td>
+      <td>
+        <a class="btn btn-secondary" href="#">Update</a>
+      </td>
+      <td>
+        <a class="btn btn-danger" href="#">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+    <p>Newspaper list is empty</p>
+  {% endif %}
+{% endblock %}

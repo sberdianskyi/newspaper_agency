@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Topic list
+    <a class="btn btn-primary" href="#">Create</a>
+  </h1>
+
+  {% if topic_list %}
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+
+      {% for topic in topic_list %}
+      <tr>
+        <td>{{ topic.name }}</td>
+        <td>
+          <a class="btn btn-secondary" href="#">Update</a>
+        </td>
+        <td>
+          <a class="btn btn-danger" href="#">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>There are no topics now.</p>
+  {% endif %}
+{% endblock %}
