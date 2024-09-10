@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ newspaper.title }} info:</h1>
+  <h2>Topic:</h2>
+  {% for topic in newspaper.topics.all %}
+    <ul>
+      <li>{{ topic.name }}</li>
+    </ul>
+    {% empty %}
+    <p>This newspaper has no assigned topics yet</p>
+  {% endfor %}
+  <h3>Redactors:</h3>
+  {% for redactor in newspaper.publishers.all %}
+  	<ul>
+      <li>{{ redactor.username }}</li>
+    </ul>
+    {% empty %}
+    <p>This newspaper has no assigned redactors yet</p>
+  {% endfor %}
+
+{% endblock %}
