@@ -2,7 +2,7 @@
 
 {% block content %}
   <h1>Newspaper list
-    <a class="btn btn-primary" href="#">Create</a>
+    <a class="btn btn-primary" href="{% url 'agency:newspaper-create' %}">Create</a>
   </h1>
 
   {% if newspaper_list %}
@@ -16,16 +16,16 @@
     {% for newspaper in newspaper_list %}
     <tr>
       <td>
-        <a href="#">{{ newspaper.title }}</a>
+        <a href="{% url 'agency:newspaper-detail' newspaper.id %}">{{ newspaper.title }}</a>
       </td>
       <td>
         {{ newspaper.content }}
       </td>
       <td>
-        <a class="btn btn-secondary" href="#">Update</a>
+        <a class="btn btn-secondary" href="{% url 'agency:newspaper-update' newspaper.id %}">Update</a>
       </td>
       <td>
-        <a class="btn btn-danger" href="#">Delete</a>
+        <a class="btn btn-danger" href="{% url 'agency:newspaper-delete' newspaper.id %}">Delete</a>
       </td>
     </tr>
     {% endfor %}
