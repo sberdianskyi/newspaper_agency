@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Redactor detail info</h1>
+  <strong> {{ redactor.first_name }} {{ redactor.last_name }}</strong>
+  <div class="ml-3">
+    <h3>Newspapers:</h3>
+      {% for newspaper in redactor.newspapers.all %}
+        <ul>
+          <li>
+            {{ newspaper.title }}
+          </li>
+        </ul>
+      {% empty %}
+        <p>Redactor has no assigned newspaper yet</p>
+      {% endfor %}
+  </div>
+{% endblock %}
