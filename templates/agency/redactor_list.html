@@ -4,7 +4,7 @@
   <h1>Redactors list:</h1>
   <ul>
     {% for redactor in redactor_list %}
-      <li>a href="{% url 'agency:redactor-detail' redactor.id %}">{{ redactor.username }}</a></li>
+      <li><a href="{% url 'agency:redactor-detail' redactor.id %}">{{ redactor.username }}</a></li>
     {% empty %}
       <p>Redactors list is empty</p>
     {% endfor %}
