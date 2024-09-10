@@ -2,7 +2,7 @@
 
 {% block content %}
   <h1>Topic list
-    <a class="btn btn-primary" href="#">Create</a>
+    <a class="btn btn-primary" href="{% url 'agency:topic-create' %}">Create</a>
   </h1>
 
   {% if topic_list %}
@@ -17,10 +17,10 @@
       <tr>
         <td>{{ topic.name }}</td>
         <td>
-          <a class="btn btn-secondary" href="#">Update</a>
+          <a class="btn btn-secondary" href="{% url 'agency:topic-update' topic.id %}">Update</a>
         </td>
         <td>
-          <a class="btn btn-danger" href="#">Delete</a>
+          <a class="btn btn-danger" href="{% url 'agency:topic-delete' topic.id %}">Delete</a>
         </td>
       </tr>
       {% endfor %}
