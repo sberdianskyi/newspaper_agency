@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>{{ newspaper.title }} info:</h1>
+  <h1>{{ newspaper.title }}
+    <a class="btn btn-secondary" href="{% url 'agency:newspaper-update' newspaper.id %}">Update</a>
+
+    <a class="btn btn-danger" href="{% url 'agency:newspaper-delete' newspaper.id %}">Delete</a>
+  </h1>
   <h2>Topic:</h2>
   {% for topic in newspaper.topics.all %}
     <ul>
@@ -10,10 +14,25 @@
     {% empty %}
     <p>This newspaper has no assigned topics yet</p>
   {% endfor %}
-  <h3>Redactors:</h3>
+  <h3>Redactors:
+  {% if request.user in newspaper.publishers.all %}
+    <form action="{% url 'agency:newspaper-update-redactor' pk=newspaper.id %}" method="post">
+      {% csrf_token %}
+      <input type="submit" class="btn btn-danger link-to-page" value="Delete me from this newspaper">
+    </form>
+    {% else %}
+    <form action="{% url 'agency:newspaper-update-redactor' pk=newspaper.id %}" method="post">
+      {% csrf_token %}
+      <input type="submit" class="btn btn-success link-to-page" value="Assign me from this newspaper">
+    </form>
+  {% endif %}
+  </h3>
+
   {% for redactor in newspaper.publishers.all %}
   	<ul>
-      <li>{{ redactor.username }}</li>
+      <li><strong>Username:</strong> {{ redactor.username }} </li>
+      <li><strong>Full name:</strong> {{ redactor.first_name }} {{ redactor.last_name }} </li>
+      <li><strong>Years of experience:</strong> {{ redactor.years_of_experience }} </li>
     </ul>
     {% empty %}
     <p>This newspaper has no assigned redactors yet</p>
