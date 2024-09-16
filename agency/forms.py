@@ -11,3 +11,30 @@ def years_of_experience_validator(years_of_experience):
         raise forms.ValidationError("Years of experience must be digits")
 
     return years_of_experience
+
+
+class RedactorCreationForm(UserCreationForm):
+    class Meta:
+        model = Redactor
+        fields = UserCreationForm.Meta.fields + ("first_name",
+                                                 "last_name",
+                                                 "years_of_experience",
+                                                 )
+
+    def clean_years_of_experience(self):
+        years_of_experience = self.cleaned_data["years_of_experience"]
+        return years_of_experience_validator(years_of_experience)
+
+
+class RedactorUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Redactor
+        fields = (
+            "first_name",
+            "last_name",
+            "years_of_experience",
+        )
+
+    def clean_years_of_experience(self):
+        years_of_experience = self.cleaned_data["years_of_experience"]
+        return years_of_experience_validator(years_of_experience)
