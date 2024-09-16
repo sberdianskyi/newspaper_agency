@@ -63,6 +63,11 @@ urlpatterns = [
         name="newspaper-delete"
     ),
     path(
+        "newspapers/<int:pk>/assign_redactor",
+        UpdateNewspaperRedactor.as_view(),
+        name="newspaper-update-redactor"
+    ),
+    path(
         "redactors/",
         RedactorListView.as_view(),
         name="redactor-list"
