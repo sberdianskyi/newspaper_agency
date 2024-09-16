@@ -38,3 +38,14 @@ class RedactorUpdateForm(forms.ModelForm):
     def clean_years_of_experience(self):
         years_of_experience = self.cleaned_data["years_of_experience"]
         return years_of_experience_validator(years_of_experience)
+
+
+class NewspaperForm(forms.ModelForm):
+    publishers = forms.ModelMultipleChoiceField(
+        queryset=get_user_model().objects.all(),
+        widget=CheckboxSelectMultiple(),
+    )
+
+    class Meta:
+        model = Newspaper
+        fields = "__all__"
