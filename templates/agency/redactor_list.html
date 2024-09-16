@@ -1,12 +1,31 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Redactors list:</h1>
-  <ul>
+  <h1>Redactors list
+    <a href="{% url 'agency:redactor-create' %}" class="btn btn-primary">Create</a>
+  </h1>
+
+  {% if redactor_list %}
+  <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>Username</th>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Years of experience</th>
+    </tr>
     {% for redactor in redactor_list %}
-      <li><a href="{% url 'agency:redactor-detail' redactor.id %}">{{ redactor.username }}</a></li>
-    {% empty %}
-      <p>Redactors list is empty</p>
+    <tr>
+      <td>{{ redactor.id }}</td>
+      <td><a href="{{ redactor.get_absolute_url }}">{{ redactor.username }}</a></td>
+      <td>{{ redactor.first_name }}</td>
+      <td>{{ redactor.last_name }}</td>
+      <td>{{ redactor.years_of_experience }}</td>
+    </tr>
     {% endfor %}
-  </ul>
+
+  </table>
+  {% else %}
+    <p>Redactors list is empty</p>
+  {% endif %}
 {% endblock %}
