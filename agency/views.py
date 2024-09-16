@@ -1,8 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
+from agency.forms import RedactorCreationForm, RedactorUpdateForm, NewspaperForm
 from agency.models import Redactor, Newspaper, Topic
 
 
@@ -68,22 +70,19 @@ class NewspaperDetailView(LoginRequiredMixin, generic.DetailView):
 
 class NewspaperCreateView(LoginRequiredMixin, generic.CreateView):
     model = Newspaper
-    fields = "__all__"
+    form_class = NewspaperForm
     success_url = reverse_lazy("agency:newspaper-list")
-    template_name = "agency/newspaper_form.html"
 
 
 class NewspaperUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Newspaper
-    fields = "__all__"
+    form_class = NewspaperForm
     success_url = reverse_lazy("agency:newspaper-list")
-    template_name = "agency/newspaper_form.html"
 
 
 class NewspaperDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Newspaper
     success_url = reverse_lazy("agency:newspaper-list")
-    template_name = "agency/newspaper_confirm_delete.html"
 
 
 class RedactorListView(LoginRequiredMixin, generic.ListView):
