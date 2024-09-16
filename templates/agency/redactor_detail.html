@@ -2,13 +2,24 @@
 
 {% block content %}
   <h1>Redactor detail info</h1>
-  <strong> {{ redactor.first_name }} {{ redactor.last_name }}</strong>
+  <h2>Username: {{ redactor.username }}
+    <a href="{% url 'agency:redactor-update' redactor.id %}" class="btn btn-secondary">Update</a>
+    <a href="{% url 'agency:redactor-delete' redactor.id %}" class="btn btn-danger">Delete</a>
+  </h2>
+
+  <p><strong>First name:</strong> {{ redactor.first_name }}</p>
+  <p><strong>Last name:</strong> {{ redactor.last_name }}</p>
+  <p><strong>Years of experience:</strong> {{ redactor.years_of_experience }}</p>
+
   <div class="ml-3">
     <h3>Newspapers:</h3>
       {% for newspaper in redactor.newspapers.all %}
         <ul>
           <li>
-            {{ newspaper.title }}
+            <strong>Newspaper title:</strong> {{ newspaper.title }}
+          </li>
+          <li>
+            <strong>Newspaper content:</strong> {{ newspaper.content }}
           </li>
         </ul>
       {% empty %}
