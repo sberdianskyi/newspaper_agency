@@ -110,3 +110,15 @@ class RedactorUpdateView(LoginRequiredMixin, generic.UpdateView):
 class RedactorDeleteView(LoginRequiredMixin, generic.UpdateView):
     model = Redactor
     success_url = reverse_lazy("agency:redactor-list")
+
+
+class UpdateNewspaperRedactor(LoginRequiredMixin, generic.View):
+    def post(self, request, pk):
+        newspaper = Newspaper.objects.get(pk=pk)
+        if request.user not in newspaper.publishers.all():
+            newspaper.publishers.add(request.user)
+        else:
+            newspaper.publishers.remove(request.user)
+        return HttpResponseRedirect(
+            reverse_lazy("agency:newspaper-detail", kwargs={"pk": pk})
+        )
