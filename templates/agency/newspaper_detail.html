@@ -23,7 +23,7 @@
     {% else %}
     <form action="{% url 'agency:newspaper-update-redactor' pk=newspaper.id %}" method="post">
       {% csrf_token %}
-      <input type="submit" class="btn btn-success link-to-page" value="Assign me from this newspaper">
+      <input type="submit" class="btn btn-success link-to-page" value="Assign me to this newspaper">
     </form>
   {% endif %}
   </h3>
