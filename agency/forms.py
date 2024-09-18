@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.forms import CheckboxSelectMultiple
 
-from agency.models import Redactor, Newspaper
+from agency.models import Redactor, Newspaper, Topic
 
 
 def years_of_experience_validator(years_of_experience):
@@ -41,6 +41,11 @@ class RedactorUpdateForm(forms.ModelForm):
 
 
 class NewspaperForm(forms.ModelForm):
+    topics = forms.ModelMultipleChoiceField(
+        queryset=Topic.objects.all(),
+        widget=CheckboxSelectMultiple(),
+    )
+
     publishers = forms.ModelMultipleChoiceField(
         queryset=get_user_model().objects.all(),
         widget=CheckboxSelectMultiple(),
