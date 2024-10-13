@@ -156,7 +156,7 @@ class RedactorUpdateView(LoginRequiredMixin, generic.UpdateView):
     form_class = RedactorUpdateForm
 
 
-class RedactorDeleteView(LoginRequiredMixin, generic.UpdateView):
+class RedactorDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Redactor
     success_url = reverse_lazy("agency:redactor-list")
 
