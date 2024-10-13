@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "agency",
     "crispy_forms",
-    "crispy_bootstrap4",
+    "crispy_bootstrap5",
 ]
 
 MIDDLEWARE = [
@@ -65,12 +65,15 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "agency.context_processors.cfg_assets_root",
             ],
         },
     },
 ]
 
-CRISPY_TEMPLATE_PACK = "bootstrap4"
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 WSGI_APPLICATION = "newspaper_agency.wsgi.application"
 
@@ -126,6 +129,8 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = (BASE_DIR / "static",)
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+ASSETS_ROOT = "/static/assets"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
