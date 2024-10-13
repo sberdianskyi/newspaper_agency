@@ -1,42 +1,83 @@
-{% extends "base.html" %}
+{% extends "layouts/base.html" %}
+
 {% load crispy_forms_filters %}
 
-{% block content %}
-  <h1>Newspaper list
-    <a class="btn btn-primary" href="{% url 'agency:newspaper-create' %}">Create</a>
-  </h1>
+{% block title %} Newspapers list {% endblock %}
 
-   <form method="get" action="" class="form-inline">
-    {{ search_form|crispy }}
-    <input class="btn btn-secondary" type="submit" value="🔍">
-  </form>
-  <p></p>
-  {% if newspaper_list %}
-  <table class="table">
-    <tr>
-      <th>Title</th>
-      <th>Content</th>
-      <th>Update</th>
-      <th>Delete</th>
-    </tr>
-    {% for newspaper in newspaper_list %}
-    <tr>
-      <td>
-        <a href="{{ newspaper.get_absolute_url }}">{{ newspaper.title }}</a>
-      </td>
-      <td>
-        {{ newspaper.content }}
-      </td>
-      <td>
-        <a class="btn btn-secondary" href="{% url 'agency:newspaper-update' newspaper.id %}">Update</a>
-      </td>
-      <td>
-        <a class="btn btn-danger" href="{% url 'agency:newspaper-delete' newspaper.id %}">Delete</a>
-      </td>
-    </tr>
-    {% endfor %}
-  </table>
-  {% else %}
-    <p>Newspaper list is empty</p>
-  {% endif %}
-{% endblock %}
+{% block body_class %} index-page {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+  <div class="page-header min-vh-70" style="background-image: url('https://cdn.pixabay.com/photo/2016/02/01/00/56/news-1172463_640.jpg')">
+    <span class="mask bg-gradient-dark opacity-6"></span>
+  </div>
+  <div class="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
+    <div class="container">
+      <div class="section text-center">
+        <h1>Newspapers list
+          <a class="btn btn-primary" href="{% url 'agency:newspaper-create' %}">Create</a>
+        </h1>
+
+          <section class="py-7">
+            <div class="container">
+              <div class="row justify-space-between py-2">
+                <div class="col-lg-3 mx-auto">
+                  <form method="get" action="" class="form-inline">
+                    <div class="input-group input-group-dynamic mb-4">
+
+                      {{ search_form|crispy }}
+
+                      <button type="submit" class="btn btn-outline-secondary" style="border-radius: 0px 10px 10px 0px;">
+                        <i class="fas fa-search"></i>
+                      </button>
+
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        {% if newspaper_list %}
+        <table class="table">
+          <tr>
+            <th>Title</th>
+            <th>Content</th>
+            <th>Update</th>
+            <th>Delete</th>
+          </tr>
+          {% for newspaper in newspaper_list %}
+          <tr>
+            <td>
+              <a href="{{ newspaper.get_absolute_url }}" class="card-link">{{ newspaper.title }}</a>
+            </td>
+            <td>
+              {{ newspaper.content }}
+            </td>
+            <td>
+              <a class="btn btn-secondary" href="{% url 'agency:newspaper-update' newspaper.id %}">Update</a>
+            </td>
+            <td>
+              <a class="btn btn-danger" href="{% url 'agency:newspaper-delete' newspaper.id %}">Delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+        {% else %}
+          <p>Newspaper list is empty</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
+
+
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
+
+

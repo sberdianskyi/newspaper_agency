@@ -1,37 +1,78 @@
-{% extends "base.html" %}
+{% extends "layouts/base.html" %}
+
 {% load crispy_forms_filters %}
 
+{% block title %} Redactors list {% endblock %}
+
+{% block body_class %} index-page {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
 {% block content %}
-  <h1>Redactors list
-    <a href="{% url 'agency:redactor-create' %}" class="btn btn-primary">Create</a>
-  </h1>
 
-  <form method="get" action="" class="form-inline">
-    {{ search_form|crispy }}
-    <input class="btn btn-secondary" type="submit" value="🔍">
-  </form>
-  <p></p>
-  {% if redactor_list %}
-  <table class="table">
-    <tr>
-      <th>ID</th>
-      <th>Username</th>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Years of experience</th>
-    </tr>
-    {% for redactor in redactor_list %}
-    <tr>
-      <td>{{ redactor.id }}</td>
-      <td><a href="{{ redactor.get_absolute_url }}">{{ redactor.username }}</a></td>
-      <td>{{ redactor.first_name }}</td>
-      <td>{{ redactor.last_name }}</td>
-      <td>{{ redactor.years_of_experience }}</td>
-    </tr>
-    {% endfor %}
+  <div class="page-header min-vh-70" style="background-image: url('https://media.istockphoto.com/id/469201004/photo/adult-man-with-dark-hair-doing-research-in-media-archive.jpg?s=612x612&w=0&k=20&c=mbXm3dq0DxhFvvhXr5F-tG5LOhyiHZkGwNAafLrMDYs=')">
+    <span class="mask bg-gradient-dark opacity-6"></span>
+  </div>
+  <div class="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
+    <div class="container">
+      <div class="section text-center">
+        <h1>Redactors list
+          <a class="btn btn-primary" href="{% url 'agency:redactor-create' %}">Create</a>
+        </h1>
 
-  </table>
-  {% else %}
-    <p>Redactors list is empty</p>
-  {% endif %}
-{% endblock %}
+          <section class="py-7">
+            <div class="container">
+              <div class="row justify-space-between py-2">
+                <div class="col-lg-3 mx-auto">
+                  <form method="get" action="" class="form-inline">
+                    <div class="input-group input-group-dynamic mb-4">
+
+                      {{ search_form|crispy }}
+
+                      <button type="submit" class="btn btn-outline-secondary" style="border-radius: 0px 10px 10px 0px;">
+                        <i class="fas fa-search"></i>
+                      </button>
+
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {% if redactor_list %}
+          <table class="table">
+            <tr>
+              <th>ID</th>
+              <th>Username</th>
+              <th>First name</th>
+              <th>Last name</th>
+              <th>Years of experience</th>
+            </tr>
+            {% for redactor in redactor_list %}
+            <tr>
+              <td>{{ redactor.id }}</td>
+              <td><a href="{{ redactor.get_absolute_url }}" class="card-link">{{ redactor.username }}</a></td>
+              <td>{{ redactor.first_name }}</td>
+              <td>{{ redactor.last_name }}</td>
+              <td>{{ redactor.years_of_experience }}</td>
+            </tr>
+            {% endfor %}
+
+          </table>
+          {% else %}
+            <p>Redactors list is empty</p>
+          {% endif %}
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
+
+
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
+
+
