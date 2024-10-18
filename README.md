@@ -6,6 +6,11 @@ Django project for tracking redactors assigned to newspapers.
 
 [Newspaper agency project deployed on Render](https://newspaper-agency-9q2e.onrender.com)
 
+Use test user to visit site and test the functionality:
+
+* login: user
+* password: user12345
+
 ## Installation
 
 Python3 must be already installed
