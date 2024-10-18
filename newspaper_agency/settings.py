@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -18,6 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
+load_dotenv()
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure-_8y11@)dg*8f^4)84tp*%m)-hnt62uged8+ky#m=5f6gyb!-uq")
@@ -77,17 +81,20 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 WSGI_APPLICATION = "newspaper_agency.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+  "default": {
+    "ENGINE": os.getenv("db_engine", "django.db.backends.postgresql"),
+    "NAME": os.getenv("db_name"),
+    "USER": os.getenv("db_user"),
+    "PASSWORD": os.getenv("db_password"),
+    "HOST": os.getenv("db_host"),
+    "PORT": os.getenv("db_port", "5432"),
+    "OPTIONS": {"sslmode": "require"},
+  }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
