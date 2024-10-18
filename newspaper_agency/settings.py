@@ -90,12 +90,12 @@ WSGI_APPLICATION = "newspaper_agency.wsgi.application"
 
 DATABASES = {
   "default": {
-    "ENGINE": os.getenv("db_engine", "django.db.backends.postgresql"),
-    "NAME": os.getenv("db_name"),
-    "USER": os.getenv("db_user"),
-    "PASSWORD": os.getenv("db_password"),
-    "HOST": os.getenv("db_host"),
-    "PORT": os.getenv("db_port", "5432"),
+    "ENGINE": "django.db.backends.postgresql",
+    "NAME": os.environ["POSTGRES_DB"],
+    "USER": os.environ["POSTGRES_USER"],
+    "PASSWORD": os.environ["POSTGRES_PASSWORD"],
+    "HOST": os.environ["POSTGRES_HOST"],
+    "PORT": os.environ["POSTGRES_DB_PORT"],
     "OPTIONS": {"sslmode": "require"},
   }
 }
