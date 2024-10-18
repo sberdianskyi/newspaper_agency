@@ -12,7 +12,9 @@ packaging==24.1
 pathspec==0.12.1
 platformdirs==4.2.2
 pluggy==1.5.0
+psycopg2-binary==2.9.10
 pytest==8.3.3
 pytest-django==4.9.0
+python-dotenv==1.0.1
 sqlparse==0.5.1
 tzdata==2024.1
